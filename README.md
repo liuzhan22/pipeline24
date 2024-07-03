@@ -1,2 +1,2 @@
 # pipeline24
-Zhan's pipeline homework for 24Summer
+My pipeline homework for 24Summer. Currently private!
