@@ -1,4 +1,4 @@
-module moduleName (
+module IF (
     input reset,
     input clk,
     input [31:0] PC,
