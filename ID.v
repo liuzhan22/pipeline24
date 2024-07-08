@@ -16,8 +16,8 @@ module ID (
 	output LuOp              ,
 	output [4 -1:0] ALUOp    ,
 
-    output [31:0] Ext_out,
-    output [31:0] LU_out,
+    output [31:0] Ext_out, // This is output of Imm Extend
+    output [31:0] LU_out, 
 
     output [31:0] RegA,
     output [31:0] RegB
@@ -31,7 +31,7 @@ module ID (
     assign Funct = IR[5:0];
     // Your code below (for question 1) This part is copied from Control.v
 
-    assign Ext_out = { ExtOp? {16{Instruction[15]}}: 16'h0000, Instruction[15:0]};
+    assign Ext_out = { ExtOp? {16{Instruction[15]}}: 16'h0000, Instruction[15:0]}; // Imm Extend
 	assign LU_out = LuOp? {Instruction[15:0], 16'h0000}: Ext_out;
 
 	// set PCSrc
