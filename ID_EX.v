@@ -1,4 +1,4 @@
-module ID_EX_Reg(
+module ID_EX_Reg (
     input reset,
     input clk,
 
