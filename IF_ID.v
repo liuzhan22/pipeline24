@@ -1,6 +1,7 @@
 module IF_ID_Reg(
     input reset, 
     input clk, 
+    
     input [31:0] PC_plus_4, // this may be used by beq, when calculating PC+4+BranchAddr
     input [31:0] IR,
 

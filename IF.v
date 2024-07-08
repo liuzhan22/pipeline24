@@ -1,6 +1,7 @@
 module IF (
     input reset,
     input clk,
+    
     input [31:0] PC,
     output reg [31:0] PC_plus_4, // calculate PC+4 in IF stage
     output [31:0] IR // Instruction fetched
