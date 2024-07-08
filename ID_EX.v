@@ -2,6 +2,8 @@ module ID_EX_Reg (
     input reset,
     input clk,
 
+    input [31:0] IR_ID_EX_in,
+
     input [31:0] RegA_ID_EX_in,
     input [31:0] RegB_ID_EX_in,
     input [31:0] Ext_out_ID_EX_in,
@@ -18,6 +20,8 @@ module ID_EX_Reg (
     input ALUSrc1_ID_EX_in,
     input ALUSrc2_ID_EX_in,
     input [4 -1:0] ALUOp_ID_EX_in,
+
+    output reg [31:0] IR_ID_EX_out,
 
     output reg [31:0] PC_plus_4_ID_EX_out,
     output reg [31:0] Ext_out_ID_EX_out,
@@ -41,6 +45,7 @@ module ID_EX_Reg (
     always @(posedge reset or posedge clk) begin
         if(reset) begin
             PC_plus_4_ID_EX_out <= 32'd0;
+            IR_ID_EX_out <= 32'd0;
             Ext_out_ID_EX_out <= 32'd0;
             RegA_ID_EX_out <= 32'd0;
             RegB_ID_EX_out <= 32'd0;
@@ -58,6 +63,7 @@ module ID_EX_Reg (
         end
         else begin
             PC_plus_4_ID_EX_out <= PC_plus_4_ID_EX_in;
+            IR_ID_EX_out <= IR_ID_EX_in;
             Ext_out_ID_EX_out <= Ext_out_ID_EX_in;
             RegA_ID_EX_out <= RegA_ID_EX_in;
             RegB_ID_EX_out <= RegB_ID_EX_in;
