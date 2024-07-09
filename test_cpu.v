@@ -4,7 +4,7 @@ module test_cpu();
 	reg clk     ;
 
 	wire        MemRead             ; 
-	wire        MemWrite            ;
+	wire        MemWrite_origin     ;
 	wire [31:0] MemBus_Address      ;
 	wire [31:0] MemBus_Write_Data   ;
 	wire [31:0] Device_Read_Data    ;
@@ -16,7 +16,7 @@ module test_cpu();
 		.Device_Read_Data   (Device_Read_Data   ), 
 		.MemBus_Write_Data  (MemBus_Write_Data  ), 
 		.MemRead            (MemRead            ), 
-		.MemWrite           (MemWrite           )
+		.MemWrite_origin    (MemWrite_origin    )
 	);
 	
 	initial begin
