@@ -314,5 +314,6 @@ module CPU(
 
 	// Update PC to PC + 4
 	assign PC = PC_plus_4;
+	
 
 endmodule
