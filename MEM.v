@@ -20,7 +20,7 @@ module MEM (
         .reset(reset),
         .clk(clk),
         .MemRead(Memory_Read),
-        .MemWrite(Memory_Write)
+        .MemWrite(Memory_Write),
         .Address(ALU_out),
         .Write_data(RegB),
         .Read_data(Memory_Read_Data)
