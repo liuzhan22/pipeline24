@@ -6,7 +6,6 @@ module EX (
     input [31:0] RegA,
     input [31:0] RegB,
     input [31:0] PC_plus_4,
-    input [31:0] Ext_out,
 
     input ALUSrc1,
     input ALUSrc2,
@@ -20,7 +19,7 @@ module EX (
 );
 
     // PC add output, which may be used by beq, etc.
-    assign PC_Add = PC_plus_4 + Ext_out;
+    assign PC_Add = PC_plus_4 + LU_out;
 
     // ALU control
     wire [4:0] AltCtl;
