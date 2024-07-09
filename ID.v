@@ -19,8 +19,6 @@ module ID (
     output [31:0] Ext_out, // This is output of Imm Extend
     output [31:0] LU_out, 
 
-    output [31:0] RegA,
-    output [31:0] RegB
 );
 
 
@@ -117,16 +115,6 @@ module ID (
 		
 	assign ALUOp[3] = OpCode[0];
 
-    RegisterFile RegisterFile_of_ID (
-        .reset(reset),
-        .clk(clk),
-        .RegWrite(1'b0),
-        .Read_register1(IR[25:21]),
-        .Read_register2(IR[20:16]),
-        .Write_register(5'b00000),
-        .Write_data(32'h00000000),
-        .Read_data1(RegA),
-        .Read_data2(RegB)
-    )
+
 
 endmodule
