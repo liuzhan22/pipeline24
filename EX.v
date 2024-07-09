@@ -22,7 +22,7 @@ module EX (
     assign PC_Add = PC_plus_4 + LU_out;
 
     // ALU control
-    wire [4:0] AltCtl;
+    wire [4:0] ALUCtl;
     wire Sign;
 
     wire [31:0] ALU_in1;
