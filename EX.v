@@ -44,7 +44,7 @@ module EX (
         .ALUCtl(ALUCtl),
         .Sign(Sign),
         .out(ALUout),
-        .Zero(Zero)
+        .zero(Zero)
     );
 
 endmodule
