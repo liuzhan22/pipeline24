@@ -6,8 +6,9 @@ module IF (
     output reg [31:0] PC_plus_4, // calculate PC+4 in IF stage
     output reg [31:0] IR // Instruction fetched
 );
+
     reg [31:0] PC_now; 
-    always @(posedge reset or posedge clk)
+    always @(posedge reset or posedge clk) begin
         if(reset) begin
             PC_now <= 32'h00000000;
             PC_plus_4 <= 32'h00000004;
@@ -16,10 +17,11 @@ module IF (
             PC_now <= PC;
             PC_plus_4 <= PC + 32'h00000004;
         end
+    end
 
     InstructionMemory instruction_fetch(
         .Address(PC_now),
         .Instruction(IR)
-    )
+    );
 
 endmodule
