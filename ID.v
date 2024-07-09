@@ -17,7 +17,7 @@ module ID (
 	output [4 -1:0] ALUOp    ,
 
     output [31:0] Ext_out, // This is output of Imm Extend
-    output [31:0] LU_out, 
+    output [31:0] LU_out
 
 );
 
