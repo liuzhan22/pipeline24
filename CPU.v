@@ -58,6 +58,11 @@ module CPU(
 	wire [31:0] Ext_out;
 	wire [31:0] LU_out;
 
+	// declare what used in WB.v ahead
+	wire RegWrite_MEM_WB_out;
+	wire [31:0] WriteBackData;
+	wire [4:0] WriteBackReg;
+
 	ID ID_main(
 		.reset(reset),
 		.clk(clk),
@@ -259,7 +264,6 @@ module CPU(
 
 	wire [2 -1:0] PCSrc_MEM_WB_out;
 	wire Branch_MEM_WB_out;
-	wire RegWrite_MEM_WB_out;
 	wire [2 -1:0] RegDst_MEM_WB_out;
 	wire [2 -1:0] MemtoReg_MEM_WB_out;
 
@@ -292,8 +296,6 @@ module CPU(
 	);
 
 	// WB stage
-	wire [31:0] WriteBackData;
-	wire [4:0] WriteBackReg;
 
 	WB WB_main(
 		.reset(reset),
