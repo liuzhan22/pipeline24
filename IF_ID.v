@@ -1,4 +1,4 @@
-module IF_ID_Reg (
+module IF_ID (
     input reset, 
     input clk, 
 
