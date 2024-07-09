@@ -4,7 +4,7 @@ module IF (
     
     input [31:0] PC,
     output reg [31:0] PC_plus_4, // calculate PC+4 in IF stage
-    output [31:0] IR // Instruction fetched
+    output reg [31:0] IR // Instruction fetched
 );
     reg [31:0] PC_now; 
     always @(posedge reset or posedge clk)
