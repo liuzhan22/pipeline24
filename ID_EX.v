@@ -7,6 +7,10 @@ module ID_EX (
     input [31:0] LU_out_ID_EX_in,
     input [31:0] PC_plus_4_ID_EX_in,
 
+    // Reg read data that should be generated in ID stage
+    input [31:0] RegA_ID_EX_in,
+    input [31:0] RegB_ID_EX_in,
+
     // Control signals generated in ID stage
     input [2 -1:0] PCSrc_ID_EX_in,
     input Branch_ID_EX_in,
@@ -23,6 +27,10 @@ module ID_EX (
 
     output reg [31:0] PC_plus_4_ID_EX_out,
     output reg [31:0] LU_out_ID_EX_out,
+
+    // Reg read data given to EX stage
+    output reg [31:0] RegA_ID_EX_out,
+    output reg [31:0] RegB_ID_EX_out,
 
     output reg [2 -1:0] PCSrc_ID_EX_out,
     output reg Branch_ID_EX_out,
