@@ -20,7 +20,7 @@ module CPU(
 		.clk(clk),
 		.PC(PC),
 		
-		.PC_new(PC_plus_4),
+		.PC_plus_4(PC_plus_4),
 		.IR(IR)
 	);
 
