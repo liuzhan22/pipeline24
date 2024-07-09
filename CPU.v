@@ -306,7 +306,7 @@ module CPU(
 
 		.RegWrite(RegWrite_MEM_WB_out),
 		.RegDst(RegDst_MEM_WB_out),
-		.MemtoReg(MemtoReg_MEM_WB_out),
+		.MemtoReg(MemtoReg_MEM_WB_out), 
 
 		.WriteBackData(WriteBackData),
 		.WriteBackReg(WriteBackReg)
@@ -314,6 +314,5 @@ module CPU(
 
 	// Update PC to PC + 4
 	assign PC = PC_plus_4;
-	
 
 endmodule
