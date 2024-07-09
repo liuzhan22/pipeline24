@@ -29,8 +29,8 @@ module ID (
     assign Funct = IR[5:0];
     // Your code below (for question 1) This part is copied from Control.v
 
-    assign Ext_out = { ExtOp? {16{Instruction[15]}}: 16'h0000, Instruction[15:0]}; // Imm Extend
-	assign LU_out = LuOp? {Instruction[15:0], 16'h0000}: Ext_out;
+    assign Ext_out = { ExtOp? {16{IR[15]}}: 16'h0000, IR[15:0]}; // Imm Extend
+	assign LU_out = LuOp? {IR[15:0], 16'h0000}: Ext_out;
 
 	// set PCSrc
 	assign PCSrc[1:0] = 
