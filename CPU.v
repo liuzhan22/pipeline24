@@ -85,19 +85,6 @@ module CPU(
 		.LU_out(LU_out)
 	);
 
-	RegisterFile RegisterFile_main(
-		.reset(reset),
-		.clk(clk),
-		.RegWrite(RegWrite_MEM_WB_out),
-		.Read_register1(IR_IF_ID_out[25:21]),
-		.Read_register2(IR_IF_ID_out[20:16]),
-		.Write_register(WriteBackReg),
-		.Write_data(WriteBackData),
-
-		.Read_data1(RegA),
-		.Read_data2(RegB)
-	);
-
 	// ID_EX reg stage
 	wire [31:0] IR_ID_EX_out;
 
@@ -312,6 +299,19 @@ module CPU(
 
 		.WriteBackData(WriteBackData),
 		.WriteBackReg(WriteBackReg)
+	);
+
+	RegisterFile RegisterFile_main(
+		.reset(reset),
+		.clk(clk),
+		.RegWrite(RegWrite_MEM_WB_out),
+		.Read_register1(IR_IF_ID_out[25:21]),
+		.Read_register2(IR_IF_ID_out[20:16]),
+		.Write_register(WriteBackReg),
+		.Write_data(WriteBackData),
+
+		.Read_data1(RegA),
+		.Read_data2(RegB)
 	);
 
 	// Update PC to PC + 4
