@@ -52,6 +52,9 @@ module ID_EX (
             IR_ID_EX_out <= 32'd0;
             LU_out_ID_EX_out <= 32'd0;
 
+            RegA_ID_EX_out <= 32'd0;
+            RegB_ID_EX_out <= 32'd0;
+
             PCSrc_ID_EX_out <= 2'd0;
             Branch_ID_EX_out <= 1'd0;
             RegWrite_ID_EX_out <= 1'd0;
@@ -67,6 +70,9 @@ module ID_EX (
             PC_plus_4_ID_EX_out <= PC_plus_4_ID_EX_in;
             IR_ID_EX_out <= IR_ID_EX_in;
             LU_out_ID_EX_out <= LU_out_ID_EX_in;
+
+            RegA_ID_EX_out <= RegA_ID_EX_in;
+            RegB_ID_EX_out <= RegB_ID_EX_in;
 
             PCSrc_ID_EX_out <= PCSrc_ID_EX_in;
             Branch_ID_EX_out <= Branch_ID_EX_in;
