@@ -2,6 +2,8 @@ module ID_EX (
     input reset,
     input clk,
 
+    input ID_EX_flush,
+
     input [31:0] IR_ID_EX_in,
 
     input [31:0] LU_out_ID_EX_in,
@@ -48,6 +50,25 @@ module ID_EX (
 
     always @(posedge reset or posedge clk) begin
         if(reset) begin
+            PC_plus_4_ID_EX_out <= 32'd0;
+            IR_ID_EX_out <= 32'd0;
+            LU_out_ID_EX_out <= 32'd0;
+
+            RegA_ID_EX_out <= 32'd0;
+            RegB_ID_EX_out <= 32'd0;
+
+            PCSrc_ID_EX_out <= 2'd0;
+            Branch_ID_EX_out <= 1'd0;
+            RegWrite_ID_EX_out <= 1'd0;
+            RegDst_ID_EX_out <= 2'd0;
+            MemRead_ID_EX_out <= 1'd0;
+            MemWrite_ID_EX_out <= 1'd0;
+            MemtoReg_ID_EX_out <= 2'd0;
+            ALUSrc1_ID_EX_out <= 1'd0;
+            ALUSrc2_ID_EX_out <= 1'd0;
+            ALUOp_ID_EX_out <= 4'd0;
+        end
+        else if (ID_EX_flush) begin
             PC_plus_4_ID_EX_out <= 32'd0;
             IR_ID_EX_out <= 32'd0;
             LU_out_ID_EX_out <= 32'd0;

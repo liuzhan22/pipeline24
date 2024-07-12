@@ -27,10 +27,14 @@ module CPU(
 	// IF_ID reg stage
 	wire [31:0] PC_plus_4_IF_ID_out;
 	wire [31:0] IR_IF_ID_out;
+	wire IF_ID_flush;
 
 	IF_ID IF_ID_main(
 		.reset(reset),
 		.clk(clk),
+
+		.IF_ID_flush(IF_ID_flush),
+
 		.PC_plus_4(PC_plus_4),
 		.IR(IR),
 
@@ -86,6 +90,7 @@ module CPU(
 	);
 
 	// ID_EX reg stage
+	wire ID_EX_flush;
 	wire [31:0] IR_ID_EX_out;
 
 	wire [31:0] PC_plus_4_ID_EX_out;
@@ -108,6 +113,8 @@ module CPU(
 	ID_EX ID_EX_main(
 		.reset(reset),
 		.clk(clk),
+
+		.ID_EX_flush(ID_EX_flush),
 
 		.IR_ID_EX_in(IR_IF_ID_out),
 
@@ -320,6 +327,8 @@ module CPU(
 	wire Branch_true;
 	wire [31:0] PC_branch;
 	assign Branch_true = Branch_ID_EX_out && Zero;
+	assign ID_EX_flush = Branch_true;
+	assign IF_ID_flush = Branch_true;
 	assign PC_branch = PC_Add; // seems no use, but syntax more clearly
 	assign PC = Branch_true? PC_branch: PC_plus_4;
 
