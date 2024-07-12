@@ -328,8 +328,14 @@ module CPU(
 	wire [31:0] PC_branch;
 	assign Branch_true = Branch_ID_EX_out && Zero;
 	assign ID_EX_flush = Branch_true;
-	assign IF_ID_flush = Branch_true;
 	assign PC_branch = PC_Add; // seems no use, but syntax more clearly
 	assign PC = Branch_true? PC_branch: PC_plus_4;
+	// jump instruction
+	wire Jump_true;
+	wire [31:0] PC_jump;
+	assign IF_ID_flush = Jump_true? 1: Branch_true;
+	assign Jump_true = (PCSrc == 2'b01);
+	assign PC_jump = {PC_plus_4_IF_ID_out[31:28], IR_IF_ID_out[25:0], 2'b00}; // currently only support 'j'
+	assign PC = Branch_true? PC_branch: Jump_true? PC_jump: PC_plus_4;
 
 endmodule
