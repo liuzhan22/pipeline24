@@ -33,9 +33,9 @@ module ForwardingUnit (
     assign ID_EX_RegisterRt = IR_ID_EX_out[20:16];
 
     assign ForwardA = (RegWrite_EX_MEM_out && (EX_MEM_RegWrAddr != 5'd0) && (EX_MEM_RegWrAddr == ID_EX_RegisterRs)) ? 2'b10 : 
-                      (RegWrite_MEM_WB_out && (MEM_WB_RegWrAddr != 5'd0) && (MEM_WB_RegWrAddr == ID_EX_RegisterRs) && ((EX_MEM_RegWrAddr != ID_EX_RegisterRs) || ~RegWrite_EX_MEM_out)) : 2'b01 : 2'b00;
+                      (RegWrite_MEM_WB_out && (MEM_WB_RegWrAddr != 5'd0) && (MEM_WB_RegWrAddr == ID_EX_RegisterRs) && ((EX_MEM_RegWrAddr != ID_EX_RegisterRs) || ~RegWrite_EX_MEM_out)) ? 2'b01 : 2'b00;
 
     assign ForwardB = (RegWrite_EX_MEM_out && (EX_MEM_RegWrAddr != 5'd0) && (EX_MEM_RegWrAddr == ID_EX_RegisterRt)) ? 2'b10 :
-                      (RegWrite_MEM_WB_out && (MEM_WB_RegWrAddr != 5'd0) && (MEM_WB_RegWrAddr == ID_EX_RegisterRt) && ((EX_MEM_RegWrAddr != ID_EX_RegisterRt) || ~RegWrite_EX_MEM_out)) : 2'b01 : 2'b00;
+                      (RegWrite_MEM_WB_out && (MEM_WB_RegWrAddr != 5'd0) && (MEM_WB_RegWrAddr == ID_EX_RegisterRt) && ((EX_MEM_RegWrAddr != ID_EX_RegisterRt) || ~RegWrite_EX_MEM_out)) ? 2'b01 : 2'b00;
 
 endmodule
