@@ -19,7 +19,7 @@ module EX (
 );
 
     // PC add output, which may be used by beq, etc.
-    assign PC_Add = PC_plus_4 + LU_out;
+    assign PC_Add = PC_plus_4 + {LU_out[29:0], 2'b00};
 
     // ALU control
     wire [4:0] ALUCtl;

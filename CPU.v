@@ -315,6 +315,12 @@ module CPU(
 	);
 
 	// Update PC to PC + 4
-	assign PC = PC_plus_4;
+	// assign PC = PC_plus_4;
+	// branch instruction, execute in EX stage: compare rs and rt directly, if branch, flush instruction in IF and ID stage.
+	wire Branch_true;
+	wire [31:0] PC_branch;
+	assign Branch_true = Branch_ID_EX_out && Zero;
+	assign PC_branch = PC_Add; // seems no use, but syntax more clearly
+	assign PC = Branch_true? PC_branch: PC_plus_4;
 
 endmodule
