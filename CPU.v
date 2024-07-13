@@ -15,6 +15,10 @@ module CPU(
 	wire [31:0] IR;
 	wire [31:0] PC_plus_4;
 
+	// declare forward signals ahead
+	wire [1:0] ForwardA;
+	wire [1:0] ForwardB;
+
 	IF IF_main(
 		.reset(reset),
 		.clk(clk),
@@ -160,9 +164,18 @@ module CPU(
 	wire [31:0] ALUout;
 	wire Zero;
 
+	// declare ahead for forwarding
+	wire [31:0] ALUout_EX_MEM_out;
+	wire [31:0] ALU_out_MEM_WB_out;
+
 	EX EX_main(
 		.reset(reset),
 		.clk(clk),
+
+		.ForwardA(ForwardA),
+		.ForwardB(ForwardB),
+		.ALUout_EX_MEM_out(ALUout_EX_MEM_out),
+		.ALU_out_MEM_WB_out(ALU_out_MEM_WB_out),
 
 		.IR(IR_ID_EX_out),
 		.RegA(RegA_ID_EX_out),
@@ -187,7 +200,7 @@ module CPU(
 	wire [31:0] RegB_EX_MEM_out;
 	wire [31:0] PC_Add_EX_MEM_out;
 	wire Zero_EX_MEM_out;
-	wire [31:0] ALUout_EX_MEM_out;
+	
 
 	wire [2 -1:0] PCSrc_EX_MEM_out;
 	wire Branch_EX_MEM_out;
@@ -254,7 +267,6 @@ module CPU(
 	wire [31:0] IR_MEM_WB_out;
 	wire [31:0] PC_plus_4_MEM_WB_out;
 	wire [31:0] Memory_Read_Data_MEM_WB_out;
-	wire [31:0] ALU_out_MEM_WB_out;
 
 	wire [2 -1:0] PCSrc_MEM_WB_out;
 	wire Branch_MEM_WB_out;
@@ -319,6 +331,28 @@ module CPU(
 
 		.Read_data1(RegA),
 		.Read_data2(RegB)
+	);
+
+	// Forwarding
+	ForwardingUnit ForwardingUnit_main(
+		.reset(reset),
+		.clk(clk),
+
+		.IR_ID_EX_out(IR_ID_EX_out),
+		.RegA_ID_EX_out(RegA_ID_EX_out),
+		.RegB_ID_EX_out(RegB_ID_EX_out),
+
+		.IR_EX_MEM_out(IR_EX_MEM_out),
+		.IR_MEM_WB_out(IR_MEM_WB_out),
+
+		.RegWrite_EX_MEM_out(RegWrite_EX_MEM_out),
+		.RegDst_EX_MEM_out(RegDst_EX_MEM_out),
+
+		.RegWrite_MEM_WB_out(RegWrite_MEM_WB_out),
+		.RegDst_MEM_WB_out(RegDst_MEM_WB_out),
+
+		.ForwardA(ForwardA),
+		.ForwardB(ForwardB)
 	);
 
 	// Update PC to PC + 4

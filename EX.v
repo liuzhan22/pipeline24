@@ -2,6 +2,11 @@ module EX (
     input reset,
     input clk,
 
+    input [1:0] ForwardA,
+    input [1:0] ForwardB,
+    input [31:0] ALUout_EX_MEM_out,
+    input [31:0] ALU_out_MEM_WB_out,
+
     input [31:0] IR,
     input [31:0] RegA,
     input [31:0] RegB,
@@ -28,8 +33,15 @@ module EX (
     wire [31:0] ALU_in1;
     wire [31:0] ALU_in2;
 
-    assign ALU_in1 = ALUSrc1? {27'h00000, IR[10:6]}: RegA;
-	assign ALU_in2 = ALUSrc2? LU_out: RegB;
+    // assign ALU_in1 = ALUSrc1? {27'h00000, IR[10:6]}: RegA;
+    assign ALU_in1 = ALUSrc1? {27'h00000, IR[10:6]}: 
+                     (ForwardA == 2'b00) ? RegA :
+                     (ForwardA == 2'b01) ? ALU_out_MEM_WB_out :
+                     (ForwardA == 2'b10) ? ALUout_EX_MEM_out : 32'd0;
+	assign ALU_in2 = ALUSrc2? LU_out: 
+                     (ForwardB == 2'b00) ? RegB :
+                     (ForwardB == 2'b01) ? ALU_out_MEM_WB_out :
+                     (ForwardB == 2'b10) ? ALUout_EX_MEM_out : 32'd0;
 
     ALUControl ALUControl_EX(
         .ALUOp(ALUOp),
