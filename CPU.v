@@ -125,7 +125,7 @@ module CPU(
 		.LU_out_ID_EX_in(LU_out),
 		.PC_plus_4_ID_EX_in(PC_plus_4_IF_ID_out),
 
-		.RegA_ID_EX_in(RegA),
+		.RegA_ID_EX_in(RegA), // support register write-then-read automatically because read happens in ID_EX stage in my codebase.
 		.RegB_ID_EX_in(RegB),
 
 		.PCSrc_ID_EX_in(PCSrc),
