@@ -383,7 +383,7 @@ module CPU(
 	assign Branch_true = Branch_ID_EX_out && Zero;
 	assign ID_EX_flush = Branch_true;
 	assign PC_branch = PC_Add; // seems no use, but syntax more clearly
-	assign PC = Branch_true? PC_branch: PC_plus_4;
+	// assign PC = Branch_true? PC_branch: PC_plus_4;
 	// jump instruction
 	wire Jump_true;
 	wire [31:0] PC_jump;
