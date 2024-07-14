@@ -11,9 +11,9 @@ module IF (
     reg [31:0] PC_now; 
     always @(posedge reset or posedge clk) begin
         if(reset) begin
-            PC_now <= 32'h00000000;
-            PC_keep <= 32'h00000000;
-            PC_plus_4 <= 32'h00000004;
+            PC_now <= 32'h00400000;
+            PC_keep <= 32'h00400000;
+            PC_plus_4 <= 32'h00400004;
         end
         else begin
             PC_now <= PC;

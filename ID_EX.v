@@ -51,7 +51,7 @@ module ID_EX (
 
     always @(posedge reset or posedge clk) begin
         if(reset) begin
-            PC_plus_4_ID_EX_out <= 32'd0;
+            PC_plus_4_ID_EX_out <= 32'h00400000;
             IR_ID_EX_out <= 32'd0;
             LU_out_ID_EX_out <= 32'd0;
 
@@ -70,7 +70,7 @@ module ID_EX (
             ALUOp_ID_EX_out <= 4'd0;
         end
         else if (ID_EX_flush) begin
-            PC_plus_4_ID_EX_out <= 32'd0;
+            PC_plus_4_ID_EX_out <= 32'h00400000;
             IR_ID_EX_out <= 32'd0;
             LU_out_ID_EX_out <= 32'd0;
 
@@ -89,7 +89,7 @@ module ID_EX (
             ALUOp_ID_EX_out <= 4'd0;
         end
         else if (ID_EX_stall) begin
-            PC_plus_4_ID_EX_out <= 32'd0;
+            PC_plus_4_ID_EX_out <= 32'h00400000;
             IR_ID_EX_out <= 32'd0;
             LU_out_ID_EX_out <= 32'd0;
 

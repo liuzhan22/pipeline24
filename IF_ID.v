@@ -14,11 +14,11 @@ module IF_ID (
 
     always @(posedge reset or posedge clk) begin
         if(reset) begin
-            PC_plus_4_IF_ID_out <= 32'd0;
+            PC_plus_4_IF_ID_out <= 32'h00400000;
             IR_IF_ID_out <= 32'd0;
         end
         else if (IF_ID_flush) begin
-            PC_plus_4_IF_ID_out <= 32'd0;
+            PC_plus_4_IF_ID_out <= 32'h00400000;
             IR_IF_ID_out <= 32'd0;
         end
         else if (IF_ID_stall) begin

@@ -40,9 +40,9 @@ module EX_MEM (
     always @(posedge reset or posedge clk) begin
         if (reset) begin
             IR_EX_MEM_out <= 32'd0;
-            PC_plus_4_EX_MEM_out <= 32'd0;
+            PC_plus_4_EX_MEM_out <= 32'h00400000;
             RegB_EX_MEM_out <= 32'd0;
-            PC_Add_EX_MEM_out <= 32'd0;
+            PC_Add_EX_MEM_out <= 32'h00400000;
             Zero_EX_MEM_out <= 1'd0;
             ALUout_EX_MEM_out <= 32'd0;
             PCSrc_EX_MEM_out <= 2'd0;

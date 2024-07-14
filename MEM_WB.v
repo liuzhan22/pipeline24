@@ -31,7 +31,7 @@ module MEM_WB (
     always @(posedge reset or posedge clk) begin
         if (reset) begin
             IR_MEM_WB_out <= 32'd0;
-            PC_plus_4_MEM_WB_out <= 32'd0;
+            PC_plus_4_MEM_WB_out <= 32'h00400000;
             Memory_Read_Data_MEM_WB_out <= 32'd0;
             ALU_out_MEM_WB_out <= 32'd0;
             PCSrc_MEM_WB_out <= 2'd0;
