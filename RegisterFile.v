@@ -21,7 +21,7 @@ module RegisterFile(
 	
 	integer i;
 	// write Wrtie_data to RF_data at clock posedge
-	always @(posedge reset or posedge clk)
+	always @(posedge reset or negedge clk)
 		if (reset)
 			for (i = 1; i < 32; i = i + 1)
 				RF_data[i] <= 32'h00000000;
