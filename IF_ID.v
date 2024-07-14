@@ -3,6 +3,7 @@ module IF_ID (
     input clk, 
 
     input IF_ID_flush,
+    input IF_ID_stall,
 
     input [31:0] PC_plus_4, // this may be used by beq, when calculating PC+4+BranchAddr
     input [31:0] IR,
@@ -19,6 +20,10 @@ module IF_ID (
         else if (IF_ID_flush) begin
             PC_plus_4_IF_ID_out <= 32'd0;
             IR_IF_ID_out <= 32'd0;
+        end
+        else if (IF_ID_stall) begin
+            PC_plus_4_IF_ID_out <= PC_plus_4_IF_ID_out;
+            IR_IF_ID_out <= IR_IF_ID_out;
         end
         else begin
             PC_plus_4_IF_ID_out <= PC_plus_4;
