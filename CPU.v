@@ -14,10 +14,14 @@ module CPU(
 	wire [31:0] PC;
 	wire [31:0] IR;
 	wire [31:0] PC_plus_4;
+	wire [31:0] PC_keep;
 
 	// declare forward signals ahead
 	wire [1:0] ForwardA;
 	wire [1:0] ForwardB;
+	wire load_use_hazard;
+	wire IF_ID_stall;
+	wire ID_EX_stall;
 
 	IF IF_main(
 		.reset(reset),
@@ -25,6 +29,7 @@ module CPU(
 		.PC(PC),
 		
 		.PC_plus_4(PC_plus_4),
+		.PC_keep(PC_keep),
 		.IR(IR)
 	);
 
@@ -38,6 +43,7 @@ module CPU(
 		.clk(clk),
 
 		.IF_ID_flush(IF_ID_flush),
+		.IF_ID_stall(IF_ID_stall),
 
 		.PC_plus_4(PC_plus_4),
 		.IR(IR),
@@ -119,6 +125,7 @@ module CPU(
 		.clk(clk),
 
 		.ID_EX_flush(ID_EX_flush),
+		.ID_EX_stall(ID_EX_stall),
 
 		.IR_ID_EX_in(IR_IF_ID_out),
 
@@ -175,7 +182,7 @@ module CPU(
 		.ForwardA(ForwardA),
 		.ForwardB(ForwardB),
 		.ALUout_EX_MEM_out(ALUout_EX_MEM_out),
-		.ALU_out_MEM_WB_out(ALU_out_MEM_WB_out),
+		.WriteBackData(WriteBackData),
 
 		.IR(IR_ID_EX_out),
 		.RegA(RegA_ID_EX_out),
@@ -355,6 +362,19 @@ module CPU(
 		.ForwardB(ForwardB)
 	);
 
+	Load_use_hazard Load_use_hazard_main(
+		.reset(reset),
+		.clk(clk),
+
+		.MemRead_ID_EX_out(MemRead_ID_EX_out),
+		.IR_ID_EX_out(IR_ID_EX_out),
+		.IR_IF_ID_out(IR_IF_ID_out),
+
+		.load_use_hazard(load_use_hazard),
+		.IF_ID_stall(IF_ID_stall),
+		.ID_EX_stall(ID_EX_stall)
+	);
+
 	// Update PC to PC + 4
 	// assign PC = PC_plus_4;
 	// branch instruction, execute in EX stage: compare rs and rt directly, if branch, flush instruction in IF and ID stage.
@@ -370,6 +390,9 @@ module CPU(
 	assign IF_ID_flush = Jump_true? 1: Branch_true;
 	assign Jump_true = (PCSrc == 2'b01);
 	assign PC_jump = {PC_plus_4_IF_ID_out[31:28], IR_IF_ID_out[25:0], 2'b00}; // currently only support 'j'
-	assign PC = Branch_true? PC_branch: Jump_true? PC_jump: PC_plus_4;
+	assign PC = Branch_true ? PC_branch : 
+		   Jump_true ? PC_jump : 
+		   load_use_hazard ? PC_keep :
+		   PC_plus_4;
 
 endmodule
