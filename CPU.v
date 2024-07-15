@@ -1,14 +1,13 @@
 module CPU(
 	input  reset                        , 
 	input  clk                          , 
+	input  [32 -1:0] Device_Read_Data   ,
+
 	output MemRead                      , 
 	output MemWrite_origin              ,
 	output [32 -1:0] MemBus_Address     , 
-	output [32 -1:0] MemBus_Write_Data  , 
-	input  [32 -1:0] Device_Read_Data 
+	output [32 -1:0] MemBus_Write_Data  
 );
-	
-	assign MemWrite_origin = MemWrite;
 
 	// IF stage
 	wire [31:0] PC;
@@ -394,5 +393,9 @@ module CPU(
 		   Jump_true ? PC_jump : 
 		   load_use_hazard ? PC_keep :
 		   PC_plus_4;
+		   
+	assign MemWrite_origin = MemWrite_EX_MEM_out;
+	assign MemBus_Address = ALUout_EX_MEM_out;
+	assign MemBus_Write_Data = RegB_EX_MEM_out;
 
 endmodule
