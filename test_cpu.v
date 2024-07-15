@@ -4,7 +4,7 @@ module test_cpu();
 
 	reg reset;
 	reg clk;
-	reg finishExecution = 0;
+	reg finishExecution;
 
 	wire [6:0] leds;
 	wire [3:0] sel;
@@ -70,6 +70,7 @@ module test_cpu();
 		reset   = 1;
 		clk     = 1;
 		MemReadforDisplay = 1'b0;
+		finishExecution = 1'b0;
 				
 		#100 reset = 0;
 
@@ -81,7 +82,7 @@ module test_cpu();
 
 	initial begin
 		#118600;
-		finishExecution = 1;
+		finishExecution = 1'b1;
 		MemReadforDisplay = 1'b1;
 		MemBus_Address_reg = 32'h00000004;
 		forever begin
