@@ -13,4 +13,4 @@ set_property -dict {PACKAGE_PIN R1  IOSTANDARD LVCMOS33} [get_ports {sel[1]}]
 set_property -dict {PACKAGE_PIN P2  IOSTANDARD LVCMOS33} [get_ports {sel[2]}]
 set_property -dict {PACKAGE_PIN M2  IOSTANDARD LVCMOS33} [get_ports {sel[3]}]
 
-create_clock -period 10.000 -name CLK -waveform {0.000 5.000} [get_ports clk]
+create_clock -period 100.000 -name CLK -waveform {0.000 5.000} [get_ports clk]
