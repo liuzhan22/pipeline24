@@ -70,7 +70,7 @@ module top(
 		.leds(leds)
 	);
 
-    always @(posedge clk or posedge reset or posedge ShowNext or posedge finishExecution) begin
+    always @(posedge reset or posedge ShowNext or posedge finishExecution) begin
         if (reset) begin
             MemReadforDisplay <= 0;
         end else if (finishExecution) begin

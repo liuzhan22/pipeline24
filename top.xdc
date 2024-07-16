@@ -19,3 +19,5 @@ set_property -dict {PACKAGE_PIN M2  IOSTANDARD LVCMOS33} [get_ports {sel[3]}]
 set_property -dict {PACKAGE_PIN V2  IOSTANDARD LVCMOS33} [get_ports {MemReadforDisplay}]
 
 create_clock -period 10.000 -name CLK -waveform {0.000 5.000} [get_ports clk]
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets finishExecution_IBUF]
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets ShowNext_IBUF]
