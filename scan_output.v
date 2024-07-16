@@ -9,10 +9,10 @@ module scan_output(
 );
 
     reg [1:0] scan_counter = 0;
-    reg [6:0] led1;
-    reg [6:0] led2;
-    reg [6:0] led3;
-    reg [6:0] led4;
+    wire [6:0] led1;
+    wire [6:0] led2;
+    wire [6:0] led3;
+    wire [6:0] led4;
 
     always @(posedge clk_1K) begin
         scan_counter <= scan_counter + 1;
