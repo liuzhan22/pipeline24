@@ -1,4 +1,7 @@
 set_property -dict {PACKAGE_PIN R4 IOSTANDARD LVCMOS33} [get_ports {clk}]
+set_property -dict {PACKAGE_PIN B22 IOSTANDARD LVCMOS33} [get_ports {reset}]
+set_property -dict {PACKAGE_PIN K22 IOSTANDARD LVCMOS33} [get_ports {finishExecution}]
+set_property -dict {PACKAGE_PIN B21 IOSTANDARD LVCMOS33} [get_ports {ShowNext}]
 
 set_property -dict {PACKAGE_PIN N2 IOSTANDARD LVCMOS33} [get_ports {leds[0]}]
 set_property -dict {PACKAGE_PIN P5 IOSTANDARD LVCMOS33} [get_ports {leds[1]}]
@@ -13,4 +16,6 @@ set_property -dict {PACKAGE_PIN R1  IOSTANDARD LVCMOS33} [get_ports {sel[1]}]
 set_property -dict {PACKAGE_PIN P2  IOSTANDARD LVCMOS33} [get_ports {sel[2]}]
 set_property -dict {PACKAGE_PIN M2  IOSTANDARD LVCMOS33} [get_ports {sel[3]}]
 
-create_clock -period 100.000 -name CLK -waveform {0.000 5.000} [get_ports clk]
+set_property -dict {PACKAGE_PIN V2  IOSTANDARD LVCMOS33} [get_ports {MemReadforDisplay}]
+
+create_clock -period 10.000 -name CLK -waveform {0.000 5.000} [get_ports clk]
