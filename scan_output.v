@@ -4,7 +4,7 @@ module scan_output(
     input wire [3:0] count_2, // second display number on LED
     input wire [3:0] count_3, // third display number on LED
     input wire [3:0] count_4, // fourth display number on LED
-    input wire enable, // enable signal
+    // input wire enable, // enable signal
     output reg [3:0] sel, // scan select signal
     output reg [6:0] leds // 7-segment display
 );
@@ -39,31 +39,52 @@ module scan_output(
         .seg(led4)
     );
 
+    // always @* begin
+    //     if (enable) begin
+    //         case(scan_counter)
+    //             2'b00: begin
+    //                 sel = 4'b1000;
+    //                 leds <= led1;
+    //             end
+    //             2'b01: begin
+    //                 sel = 4'b0100;
+    //                 leds <= led2;
+    //             end
+    //             2'b10: begin
+    //                 sel = 4'b0010;
+    //                 leds <= led3;
+    //             end
+    //             2'b11: begin
+    //                 sel = 4'b0001;
+    //                 leds <= led4;
+    //             end
+    //         endcase
+    //     end
+    //     else begin
+    //         sel = 4'b0000;
+    //         leds = 7'b0000000;
+    //     end
+    // end
+
     always @* begin
-        if (enable) begin
-            case(scan_counter)
-                2'b00: begin
-                    sel = 4'b1000;
-                    leds <= led1;
-                end
-                2'b01: begin
-                    sel = 4'b0100;
-                    leds <= led2;
-                end
-                2'b10: begin
-                    sel = 4'b0010;
-                    leds <= led3;
-                end
-                2'b11: begin
-                    sel = 4'b0001;
-                    leds <= led4;
-                end
-            endcase
-        end
-        else begin
-            sel = 4'b0000;
-            leds = 7'b0000000;
-        end
+        case(scan_counter)
+            2'b00: begin
+                sel = 4'b1000;
+                leds <= led1;
+            end
+            2'b01: begin
+                sel = 4'b0100;
+                leds <= led2;
+            end
+            2'b10: begin
+                sel = 4'b0010;
+                leds <= led3;
+            end
+            2'b11: begin
+                sel = 4'b0001;
+                leds <= led4;
+            end
+        endcase
     end
 
 endmodule
