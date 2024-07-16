@@ -8,7 +8,7 @@ module InstructionMemory(
 
 			// -------- Paste Binary Instruction Below (Inst-q1-1/Inst-q1-2.txt)
 8'd0:	Instruction <= 32'h20100000;
-8'd1:	Instruction <= 32'h8e110000;
+8'd1:	Instruction <= 32'h8c110000;
 8'd2:	Instruction <= 32'h00005020;
 8'd3:	Instruction <= 32'h22080004;
 8'd4:	Instruction <= 32'h01005820;
@@ -28,6 +28,9 @@ module InstructionMemory(
 8'd18:	Instruction <= 32'hae0a0000;
 8'd19:	Instruction <= 32'h22f70001;
 8'd20:	Instruction <= 32'h08100014;
+
+
+
 
 			// -------- Paste Binary Instruction Above
 			
