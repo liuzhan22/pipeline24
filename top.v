@@ -1,15 +1,13 @@
 module top(
+	input reset,
     input clk,
+	input ShowNext,
+	input finishExecution,
     output [3:0] sel,
     output [6:0] leds
 );
 
-	reg reset;
-	reg finishExecution;
-    reg ShowNext;
-
 	wire [31:0] Device_Read_Data;
-
 	wire MemRead;
 	wire MemWrite_origin;
 	wire [31:0] MemBus_Address;
@@ -40,7 +38,7 @@ module top(
 		.clk(clk_100ns),
 		.MemRead(MemReadforDisplay),
 		.MemWrite(MemWrite_origin),
-		.Address(finishExecution ? MemBus_Address_reg : MemBus_Address),
+		.Address(MemReadforDisplay ? MemBus_Address_reg : MemBus_Address),
 		.Write_data(MemBus_Write_Data),
 		.Read_data(MemRead_Data)
 	);
@@ -72,11 +70,9 @@ module top(
 		.leds(leds)
 	);
 
-    always @(posedge clk or posedge reset or posedge ShowNext) begin
+    always @(posedge clk or posedge reset or posedge ShowNext or posedge finishExecution) begin
         if (reset) begin
-            reset <= 1;
             MemReadforDisplay <= 0;
-            finishExecution <= 0;
         end else if (finishExecution) begin
             MemReadforDisplay <= 1;
             MemBus_Address_reg <= 32'h00000004;
