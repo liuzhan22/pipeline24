@@ -1,11 +1,15 @@
 module top(
 	input reset,
     input clk,
-	input ShowNext,
 	input finishExecution,
+
     output [3:0] sel,
     output [6:0] leds
 );
+
+	parameter ShowNextTime = 16'd1000; // 1s
+	reg ReadyToDisplay; // Ready to display
+	reg [15:0] count_for_showNext = 16'd0;
 
 	wire [31:0] Device_Read_Data;
 	wire MemRead;
@@ -70,15 +74,23 @@ module top(
 		.leds(leds)
 	);
 
-    always @(posedge reset or posedge ShowNext or posedge finishExecution) begin
-        if (reset) begin
-            MemReadforDisplay <= 0;
-        end else if (finishExecution) begin
-            MemReadforDisplay <= 1;
-            MemBus_Address_reg <= 32'h00000004;
-        end else if (ShowNext) begin
-            MemBus_Address_reg <= MemBus_Address_reg + 32'h00000004;
-        end
-    end
+	always @(posedge clk_1k or posedge reset or posedge finishExecution) begin
+		if (reset) begin
+			MemReadforDisplay <= 0;
+			count_for_showNext <= 16'd0;
+			ReadyToDisplay <= 0;
+		end else if (finishExecution) begin
+			MemReadforDisplay <= 1;
+			MemBus_Address_reg <= 32'h00000004;
+			count_for_showNext <= 16'd0;
+			ReadyToDisplay = 1;
+		end else if (ReadyToDisplay && (count_for_showNext >= ShowNextTime)) begin
+			MemBus_Address_reg <= MemBus_Address_reg + 32'h00000004;
+			count_for_showNext <= 16'd0;
+		end else if (ReadyToDisplay) begin
+			count_for_showNext <= count_for_showNext + 1;
+		end
+	end
 
 endmodule
+
