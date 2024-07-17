@@ -28,7 +28,7 @@ module top(
 	
 	CPU cpu1(  
 		.reset              (reset              ), 
-		.clk                (clk_100ns          ), 
+		.clk                (clk                ), 
 		.Device_Read_Data   (Device_Read_Data   ), 
 
 		.MemRead            (MemRead            ), 
@@ -39,7 +39,7 @@ module top(
 
 	DataMemory data_memory1(
 		.reset(reset),
-		.clk(clk_100ns),
+		.clk(clk),
 		.MemRead(MemReadforDisplay),
 		.MemWrite(MemWrite_origin),
 		.Address(MemReadforDisplay ? MemBus_Address_reg : MemBus_Address),
